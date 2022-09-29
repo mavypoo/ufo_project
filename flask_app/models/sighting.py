@@ -1,4 +1,3 @@
-from lib2to3.pytree import _Results
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 
@@ -23,7 +22,7 @@ class Sighting:
     @classmethod
     def add_sighting(cls):
         query = "INSERT INTO sightings (location, date, time, description, Intensity, num_of_activities, reaction, user_id) VALUES (%(location)s, %(date)s, %(time)s, %(description)s, %(Intensity)s, %(num_of_activities)s, %(reaction)s, %(user_id)s);"
-        results = connectToMySQL
+        results = connectToMySQL(db).query_db(query)
         # returning to see if the data was entered to the database
         return results
 
@@ -41,6 +40,7 @@ class Sighting:
     def get_one_sighting_by_user(cls, data):
         query = "SELECT * FROM sightings JOIN users on users.id = sightings.user_id WHERE sightings.id = %(id)s;"
         results = connectToMySQL(db).query_db(query, data)
+
         return results
 
     # Main page - cards - all sightings by users

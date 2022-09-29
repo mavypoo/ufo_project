@@ -51,7 +51,7 @@ def edit_sighting_page(id):
         "id": id
     }
     this_sighting = Sighting.get_one_sighting_by_user(data)
-    return render_template("sighting_edit.html", this_sighting)
+    return render_template("sighting_edit.html", this_sighting=this_sighting)
 
 
 #edit_sighting_db
@@ -69,11 +69,12 @@ def update_sighting_page(id):
         "description": request.form["description"],
         "Intensity": request.form["Intensity"],
         "num_of_activities": request.form["num_of_activities"],
-        "reaction": data["reaction"],
+        "reaction": request.form["reaction"],
+        "id": id,
     }
-    #call the function that does the query, pass in data to edit th database
+    #call the function that does the query, pass in data to edit the database
     #call the sighting class and the add_sighting function
-    Sighting.add_sighting(data)
+    Sighting.update_sighting(data)
     return redirect("/sightings")
 
 
