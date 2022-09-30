@@ -20,9 +20,9 @@ class Sighting:
     # cls gets all the attributes from the class to the method
     # Method to add a sighting to the database
     @classmethod
-    def add_sighting(cls):
+    def add_sighting(cls, data):
         query = "INSERT INTO sightings (location, date, time, description, Intensity, num_of_activities, reaction, user_id) VALUES (%(location)s, %(date)s, %(time)s, %(description)s, %(Intensity)s, %(num_of_activities)s, %(reaction)s, %(user_id)s);"
-        results = connectToMySQL(db).query_db(query)
+        results = connectToMySQL(db).query_db(query, data)
         # returning to see if the data was entered to the database
         return results
 
@@ -90,9 +90,5 @@ class Sighting:
             is_valid = False 
         return is_valid
 
-
-
-
-        
 
 #The Static methods are used to do some utility tasks, and class methods are used for factory methods

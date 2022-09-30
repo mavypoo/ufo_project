@@ -89,7 +89,7 @@ def view_sighting(id):
         "id": id,
     }
     this_sighting = Sighting.get_one_sighting_by_user(data)
-    return render_template("sighting_view.html", this_sighting)
+    return render_template("sighting_view.html", this_sighting = this_sighting)
 
 
 #Route that will delete a game, Need the id of the game to delete 
@@ -99,7 +99,7 @@ def delete_sighting(id):
     if "user_id" not in session:
         return redirect("/")
     data = {
-        "id": id, # ID of the game
+        "id": id, # ID of the sighting
     }
     Sighting.delete_sighting(data)
     return redirect("/")

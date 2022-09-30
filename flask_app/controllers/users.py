@@ -1,6 +1,8 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
-from flask_app.models.user import User 
+from flask_app.models.user import User
+from flask_app.models.sighting import Sighting
+from flask_app.models.user_image import User_Image
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -65,6 +67,46 @@ def success():
         flash("You must be logged in to view this page")
         return redirect("/")
     return render_template("sightings.html")
+
+@app.route("/user/<int:id>")
+def user_dashboard(id):
+    data = {
+        "user_id": id
+    }
+    this_user = User.get_user(data)
+    this_user_image = User_Image.get_image_by_user(data)
+    this_user_posts = Sighting.get_all_sightings_by_user(data)
+    return render_template("user.html", this_user = this_user, this_user_image = this_user_image, this_user_posts = this_user_posts)
+
+@app.route("/profile/<int:id>")
+def profile_page(id):
+    data = {
+        "id": id
+    }
+    this_user = User.get_user(data)
+    this_user_image = User_Image.get_image_by_user(data)
+    return render_template("profile.html", this_user = this_user, this_user_image = this_user_image)
+
+@app.route("/profile/update/<int:id>")
+def update_profile(id):
+    # Validate 
+    if not User.validate_user(request.form):
+        #if the validation failes, redirect back to the profile
+        return redirect('/profile/{id}')
+    #bcrypt changes the password for security password, stores in hashpass as the password as oppose to the actual password
+    hash_pass = bcrypt.generate_password_hash(request.form['password'])
+    data = {
+        "id": id,
+        "first_name": request.form['first_name'],
+        "last_name": request.form['last_name'],
+        "user_name": request.form['user_name'],
+        "email": request.form['email'],
+        "password": hash_pass
+    }
+    User.update_user(data)
+    return redirect("/user/{id}")
+
+
 
 # /logout (INVISIBLE route) - clears session, sends the user back to login/registration page. 
 @app.route("/logout")

@@ -46,7 +46,11 @@ class User:
             return False
         return cls(result[0])
 
-
+    #update user
+    @classmethod
+    def update_user(cls, data):
+        query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, user_name = %(user_name)s, email = %(email)s, password = %(password)s WHERE id = %(id)s;"
+        
 # What kind of method do we need into order to perform our validations? check our data looks good first before we allow a new user to be registered in our database 
 #staticmethod is where we put all of our validations
     @staticmethod
@@ -66,7 +70,7 @@ class User:
         query = "SELECT * FROM users WHERE user_name = %(user_name)s"
         user_matches = connectToMySQL(db).query_db(query, {"user_name": user['user_name']})
         if len(user_matches) > 0:
-            flash("Username is already being used. Plesae Try another name.")
+            flash("Username is already being used. Please Try another name.")
             is_valid = False
         if len(user['user_name']) < 3:
             flash("Username must be at least 3 characters long.")
