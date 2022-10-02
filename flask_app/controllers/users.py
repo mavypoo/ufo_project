@@ -1,4 +1,4 @@
-from flask_app import app
+from flask_app import app #need this for the app.route. We need to know what the app part is before we can start using it.
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.user import User
 from flask_app.models.sighting import Sighting
@@ -6,11 +6,12 @@ from flask_app.models.user_image import User_Image
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
-
+#sign in page. 
 @app.route("/")
 def index():
     return render_template("sign_in.html")
 
+#sign up page
 @app.route("/sign_up")
 def sign_up():
     return render_template("sign_up.html")
@@ -52,11 +53,11 @@ def login_user():
     if not bcrypt.check_password_hash(this_user.password, request.form['password']):
         flash("Invalid Email or Password")
         return redirect('/')
-    # Savide ID in session
+    # Save ID in session
     session['user_id'] = this_user.id
     session['first_name'] = this_user.first_name
     session['last_name'] = this_user.last_name
-    session['user_name'] = request.form['use_name']
+    # session['user_name'] = request.form['user_name']
     # Redirect to /sightings
     return redirect('/sightings')
 
@@ -66,7 +67,10 @@ def success():
     if "user_id" not in session:
         flash("You must be logged in to view this page")
         return redirect("/")
-    return render_template("sightings.html")
+    all_post = Sighting.get_all_sightings_by_users()
+    return render_template("sightings.html", all_post=all_post, userID=session['user_id'])
+
+
 
 @app.route("/user/<int:id>")
 def user_dashboard(id):

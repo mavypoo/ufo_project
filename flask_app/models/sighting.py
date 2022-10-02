@@ -43,11 +43,11 @@ class Sighting:
 
         return results
 
-    # Main page - cards - all sightings by users
+    # Main page - cards - all sightings by users 
     @classmethod
-    def get_all_sightings_by_users(cls, data):
+    def get_all_sightings_by_users(cls):
         query = "SELECT * FROM sightings JOIN users on users.id = sightings.user_id;"
-        results = connectToMySQL(db).query_db(query, data)
+        results = connectToMySQL(db).query_db(query)
         return results
 
     # User dashboard

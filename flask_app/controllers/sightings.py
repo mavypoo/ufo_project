@@ -2,11 +2,6 @@ from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.sighting import Sighting 
 
-#everyones post
-@app.route("/sightings")
-def sightings():
-    pass
-
 
 #add_sighing_form
 @app.route("/sighting/add")

@@ -1,0 +1,45 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.button_bar{
+    /* background-color: aqua; */
+    padding: 30px;
+    text-align: center;
+}
+
+.add_button{
+    background-color: aqua;
+    text-decoration: none; /*to remove the underline on the link*/
+    padding: 10px;
+    font-weight: bold;
+    border-style: solid;
+    border-color:aqua;
+    border-radius: 10px;
+    color: black;
+}
+
+.add_button:hover{
+    color:white;
+    background-color: green;
+    border-color: green;
+    -moz-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    -webkit-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;
+}
+
+
+.container_posts{
+    padding: 0px;
+    background-color: greenyellow;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap; /* shrinks page and puts the card 1 row at a time */
+}
+
+.post{
+    margin:15px;
+}
