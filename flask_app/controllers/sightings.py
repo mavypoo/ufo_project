@@ -28,6 +28,7 @@ def create_sighting():
         "Intensity": request.form["Intensity"],
         "num_of_activities": request.form["num_of_activities"],
         "reaction": data["reaction"],
+        "title": data["title"],
     }
     #call the function that does the query, pass in data to edit th database
     #call the sighting class and the add_sighting function
@@ -65,6 +66,7 @@ def update_sighting_page(id):
         "Intensity": request.form["Intensity"],
         "num_of_activities": request.form["num_of_activities"],
         "reaction": request.form["reaction"],
+        "title": request.form["title"],
         "id": id,
     }
     #call the function that does the query, pass in data to edit the database

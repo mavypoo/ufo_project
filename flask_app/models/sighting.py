@@ -13,6 +13,7 @@ class Sighting:
         self.Intensity = data["Intensity"]
         self.num_of_activities = data["num_of_activities"]
         self.reaction = data["reaction"]
+        self.title = data["title"]
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
 
@@ -21,7 +22,7 @@ class Sighting:
     # Method to add a sighting to the database
     @classmethod
     def add_sighting(cls, data):
-        query = "INSERT INTO sightings (location, date, time, description, Intensity, num_of_activities, reaction, user_id) VALUES (%(location)s, %(date)s, %(time)s, %(description)s, %(Intensity)s, %(num_of_activities)s, %(reaction)s, %(user_id)s);"
+        query = "INSERT INTO sightings (location, date, time, description, Intensity, num_of_activities, reaction, title, user_id) VALUES (%(location)s, %(date)s, %(time)s, %(description)s, %(Intensity)s, %(num_of_activities)s, %(reaction)s, %(title)s, %(user_id)s);"
         results = connectToMySQL(db).query_db(query, data)
         # returning to see if the data was entered to the database
         return results
@@ -29,7 +30,7 @@ class Sighting:
     # Need to include data because we need to pull the data to be able to update the data
     @classmethod
     def update_sighting(cls, data):
-        query = "UPDATE sightings SET location = %(location)s, date = %(date)s, time = %(time)s, description = %(description)s, Intensity = %(Intensity)s, num_of_activities = %(num_of_activities)s, reaction = %(reaction)s WHERE id = %(id)s;"
+        query = "UPDATE sightings SET location = %(location)s, date = %(date)s, time = %(time)s, description = %(description)s, Intensity = %(Intensity)s, num_of_activities = %(num_of_activities)s, reaction = %(reaction)s, %(title)s WHERE id = %(id)s;"
         # the id of the sighting, since we're making changes to the sighting (we need to know what changes have been made to the sighting)
         return connectToMySQL(db).query_db(query, data)
 
@@ -87,6 +88,9 @@ class Sighting:
             is_valid = False 
         if len(sighting["reaction"]) < 3:
             flash("Reaction must be at least 3 characters long")
+            is_valid = False 
+        if len(sighting["title"]) < 3:
+            flash("title must be at least 3 characters long")
             is_valid = False 
         return is_valid
 
