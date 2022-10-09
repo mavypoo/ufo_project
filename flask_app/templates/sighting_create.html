@@ -33,61 +33,66 @@
         </div>
     </nav>
     <section class="vh-100" style="background-color: #203E4A;">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col col-xl-10">
-                    <div class="card" style="border-radius: 1rem;">
-                        <div class="row g-0">
-                            <div class="col-md-6 col-lg-7 d-flex align-items-center">
-                                <div class="card-body p-4 p-lg-5 text-black">
-                                    <form action="/sighting/create" method="post">
-                                        <div class="d-flex align-items-center mb-3 pb-1">
-                                            <span class="h1 fw-bold mb-0">Add Sighting</span>
-                                        </div>
-                                        {% with messages = get_flashed_messages() %}
-                                            {% if messages %}
-                                                <div class="error" style="color: red;">
-                                                    {% for message in messages %}
-                                                        <p>{{message}}</p>
-                                                    {% endfor %}
-                                                </div>
-                                            {% endif %}
-                                        {% endwith %}
-                                        <div class="row">
-                                            <div class="form-outline col mb-4">
-                                                <input type="number"  class="form-control form-control-lg" name="num_of_activities" placeholder="Number of Activities"/>
-                                            </div>
-                                            <div class="form-outline col mb-4">
-                                                <input type="text"  class="form-control form-control-lg" name="Intensity" placeholder="How intesnse was the activity?"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-outline mb-4">
-                                            <input type="text"  class="form-control form-control-lg" name="description" placeholder=" Description of the activity?"/>
-                                        </div>
-                                        <div class="form-outline mb-4">
-                                            <input type="text"  class="form-control form-control-lg" name="reaction" placeholder="Reaction to the acivity?"/>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-outline col mb-4">
-                                                <input type="password"  class="form-control form-control-lg" name="password" placeholder="Password"/>
-                                            </div>
-                                            <div class="form-outline col mb-4">
-                                                <input type="password"  class="form-control form-control-lg" name="confirm_password" placeholder="Confirm Password"/>
-                                            </div>
-                                        </div>
-                                        <div class="pt-1 mb-4">
-                                            <button class="btn btn-dark btn-lg btn-block">Sign Up</button>
-                                        </div>
-                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Already have an account? 
-                                            <a href="/" style="color: #393f81;">Sign In</a>
-                                        </p>
-                                    </form>
-                                </div>
-                            </div>
+        <div>
+            <br><br><br>
+        </div>
+        <div class="white_box">
+                <h1 class="header">Create Sighting!</h1>
+            <form action="/sighting/create" method="post">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="error" style="color: red;">
+                            {% for message in messages %}
+                                <p>{{message}}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                <div class="form_container">
+                    <div class="left_col">
+                        <h6>Title:</h6>
+                        <div class="form-outline col mb-4">
+                            <input type="text"  class="form-control form-control-lg" name="title"/>
+                        </div>
+                        <h6>Number of Activities:</h6>
+                        <div class="form-outline col mb-4">
+                            <input type="number"  class="form-control form-control-lg" name="num_of_activities"/>
+                        </div>
+                        <h6>How intense was the activity?:</h6>
+                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                            <input type="radio" class="btn-check" name="Intensity" id="btnradio1" value="low" autocomplete="off" checked>
+                            <label class="btn btn-outline-primary" for="btnradio1">Low</label>
+                            <input type="radio" class="btn-check" name="Intensity" id="btnradio2" value="moderate" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="btnradio2">Moderate</label>
+                            <input type="radio" class="btn-check" name="Intensity" id="btnradio3" value="intense" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="btnradio3">Intense</label>
+                        </div>
+                    </div>
+                    <div class="right_col">
+                        <h6>Where did the activity happen?:</h6>
+                        <div class="form-outline col mb-4">
+                        <input type="text"  class="form-control form-control-lg" name="location"/>
+                        </div>
+                        <h6>When did the activity happen?:</h6>
+                        <div class="form-outline col mb-4">
+                            <input type="date"  class="form-control form-control-lg" name="date" placeholder="When did the activity happen?"/>
+                        </div>
+                        <h6>What time did the activity</h6>
+                        <div class="form-outline col mb-4">
+                            <input type="time"  class="form-control form-control-lg" name="time" placeholder="When time did the activity happen?"/>
                         </div>
                     </div>
                 </div>
-            </div>
+                    <div class="text-boxes">
+                        <textarea class="text-box" name="description" cols="85" rows="10" placeholder="Description to the acivity?"></textarea>
+                        <textarea class="text-box" name="reaction" cols="85" rows="10" placeholder="Reaction to the acivity?"></textarea>
+                    </div>
+                        <div class="button_bar">
+                            <button class="btn btn-info btn-lg btn-block">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>

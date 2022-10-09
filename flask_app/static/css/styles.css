@@ -41,10 +41,54 @@
     flex-flow: row wrap; /* shrinks page and puts the card 1 row at a time */
 }
 
-.post{
+#post{
     margin:15px;
+    height: 300px;
 }
+
+.detail_overflow{
+    max-height:150px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+
 
 .ufo{
     height: 10px;
+}
+
+.white_box{
+    background-color: white;
+    margin: 0px auto;
+    padding: 40px;
+    width: 75%;
+    border-style: solid;
+    border-color: black;
+    border-radius: 30px;
+}
+
+.form_container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.header{
+    text-align: center;
+}
+
+.left_col, .right_col{
+    margin: 10px;
+    width: 75%;
+}
+
+.text-boxes{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.text-box{
+    margin: -10px 20px 0px 30px;
+    width: 100%;
 }

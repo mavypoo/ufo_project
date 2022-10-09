@@ -30,7 +30,7 @@ class Sighting:
     # Need to include data because we need to pull the data to be able to update the data
     @classmethod
     def update_sighting(cls, data):
-        query = "UPDATE sightings SET location = %(location)s, date = %(date)s, time = %(time)s, description = %(description)s, Intensity = %(Intensity)s, num_of_activities = %(num_of_activities)s, reaction = %(reaction)s, %(title)s WHERE id = %(id)s;"
+        query = "UPDATE sightings SET location = %(location)s, date = %(date)s, time = %(time)s, description = %(description)s, Intensity = %(Intensity)s, num_of_activities = %(num_of_activities)s, reaction = %(reaction)s, title = %(title)s WHERE id = %(id)s;"
         # the id of the sighting, since we're making changes to the sighting (we need to know what changes have been made to the sighting)
         return connectToMySQL(db).query_db(query, data)
 
@@ -83,7 +83,7 @@ class Sighting:
         if len(sighting["description"]) < 3:
             flash("Description must be at least 3 characters long")
             is_valid = False 
-        if sighting["num_of_activities"] < 1:
+        if int(sighting ["num_of_activities"]) < 1:
             flash("number of activities must be atleast 1")
             is_valid = False 
         if len(sighting["reaction"]) < 3:
