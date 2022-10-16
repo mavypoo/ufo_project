@@ -111,6 +111,9 @@ def update_profile(id):
     return redirect("/user/{id}")
 
 
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
 
 # /logout (INVISIBLE route) - clears session, sends the user back to login/registration page. 
 @app.route("/logout")

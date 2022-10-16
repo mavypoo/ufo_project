@@ -41,8 +41,7 @@ class Sighting:
     def get_one_sighting_by_user(cls, data):
         query = "SELECT * FROM sightings JOIN users on users.id = sightings.user_id WHERE sightings.id = %(id)s;"
         results = connectToMySQL(db).query_db(query, data)
-
-        return results
+        return results[0]
 
     # Main page - cards - all sightings by users 
     @classmethod

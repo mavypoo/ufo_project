@@ -13,13 +13,13 @@ class Comment:
 
     @classmethod 
     def add_comment(cls, data):
-        query = "INSERT into comments (content) VALUES (%(content)s);"
+        query = "INSERT into comments (content, sighting_id, user_id) VALUES (%(content)s, %(sighting_id)s, %(user_id)s);"
         results = connectToMySQL(db).query_db(query, data)
         return results
 
     @classmethod
     def get_comment_by_sighting_and_user(cls, data):
-        query = "SELECT * FROM comments JOIN sightings on sighthings.id = comments.sightings_id JOIN users on users.id = comments.user_id WHERE comments.id = %(id)s;"  
+        query = "SELECT * FROM comments JOIN sightings on sightings.id = comments.sighting_id JOIN users on users.id = comments.user_id WHERE comments.sighting_id= %(id)s ORDER BY comments.created_at ASC;"  
         results = connectToMySQL(db).query_db(query, data)
         return results
 

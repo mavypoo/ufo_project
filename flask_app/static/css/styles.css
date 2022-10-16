@@ -33,7 +33,7 @@
 
 .container_posts{
     padding: 0px;
-    background-color: greenyellow;
+    /* background-color: greenyellow; */
     margin: auto;
     width: 75%;
     display: flex;
@@ -69,6 +69,10 @@
     border-radius: 30px;
 }
 
+.content_box{
+    justify-content: center; 
+}
+
 .form_container{
     display: flex;
     justify-content: space-evenly;
@@ -91,4 +95,50 @@
 .text-box{
     margin: -10px 20px 0px 30px;
     width: 100%;
+}
+
+.center_text{
+    text-align: center;
+}
+
+.content_box{
+    color: white;
+    text-align: center;
+    padding: 40px;
+}
+
+
+.sighting_header{
+    font-size: 40pt;
+}
+
+.sighting_date_time_box{
+    display: flex;
+    justify-content: center;
+}
+
+.sighting_text{
+    text-align: left;
+}
+
+.comment_btn{
+    display: block;
+    background-color: aqua;
+    border-color:aqua;
+    color: black; 
+}
+
+.comment_btn:hover{
+    color:white;
+    background-color: green;
+    border-color: green;
+    -moz-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    -webkit-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;
+}
+
+.comment_section{
+    overflow-y: auto;
+    max-height: 35vh;
 }

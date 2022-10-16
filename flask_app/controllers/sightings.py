@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
-from flask_app.models.sighting import Sighting 
+from flask_app.models.sighting import Sighting
+from flask_app.models.comment import Comment
 
 
 #add_sighing_form
@@ -77,7 +78,7 @@ def update_sighting_page(id):
 
 
 #view sightings, Route that will show an individual game - visible route 
-@app.route("/sightings/<int:id>")
+@app.route("/sighting/<int:id>")
 def view_sighting(id):
     #1 Check to see if someone is logged in 
     if "user_id" not in session:
@@ -87,7 +88,8 @@ def view_sighting(id):
         "id": id,
     }
     this_sighting = Sighting.get_one_sighting_by_user(data)
-    return render_template("sighting_view.html", this_sighting = this_sighting)
+    all_comments = Comment.get_comment_by_sighting_and_user(data)
+    return render_template("sighting_view.html", this_sighting = this_sighting, all_comments = all_comments)
 
 
 #Route that will delete a game, Need the id of the game to delete 
