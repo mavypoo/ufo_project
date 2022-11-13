@@ -30,10 +30,9 @@ class Sighting:
     # Need to include data because we need to pull the data to be able to update the data
     @classmethod
     def update_sighting(cls, data):
-        query = "UPDATE sightings SET location = %(location)s, date = %(date)s, time = %(time)s, description = %(description)s, Intensity = %(Intensity)s, num_of_activities = %(num_of_activities)s, reaction = %(reaction)s, title = %(title)s WHERE id = %(id)s;"
-        # the id of the sighting, since we're making changes to the sighting (we need to know what changes have been made to the sighting)
-        return connectToMySQL(db).query_db(query, data)
-
+        query = "UPDATE sightings SET location = %(location)s, date = %(date)s, time = %(time)s, description = %(description)s, Intensity = %(Intensity)s, num_of_activities = %(num_of_activities)s, reaction = %(reaction)s, title = %(title)s WHERE id=%(id)s;"
+        results = connectToMySQL(db).query_db(query, data)
+        return results
 
     # Get one sighting made by the user
     # View sighting page

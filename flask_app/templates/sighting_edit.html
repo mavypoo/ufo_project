@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+    <!-- link to include the library-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/sightings">
+                <img src="https://pluspng.com/img-png/ufo-png-hd-ufo-image-613.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                UFO Sightings
+            </a>
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" href="/sightings">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/{{userID}}">My Page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <section class="vh-100" style="background-color: #203E4A;">
+        <div>
+            <br><br><br>
+        </div>
+        <div class="white_box">
+                <h1 class="header">Create Sighting!</h1>
+            <form action="/sighting/update/{{this_sighting.id}}" method="post">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="error" style="color: red;">
+                            {% for message in messages %}
+                                <p>{{message}}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                <div class="form_container">
+                    <div class="left_col">
+                        <h6>Title:</h6>
+                        <div class="form-outline col mb-4">
+                            <input type="text"  class="form-control form-control-lg" name="title" value= "{{this_sighting.title}}"/>
+                        </div>
+                        <h6>Number of Activities:</h6>
+                        <div class="form-outline col mb-4">
+                            <input type="number"  class="form-control form-control-lg" name="num_of_activities" value= "{{this_sighting.num_of_activities}}"/>
+                        </div>
+                        <h6>How intense was the activity?:</h6>
+                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                            {% if this_sighting.Intensity == "low" %}
+                                <input type="radio" class="btn-check" name="Intensity" id="btnradio1" value="low" autocomplete="off" checked>
+                                <label class="btn btn-outline-primary" for="btnradio1">Low</label>
+                                <input type="radio" class="btn-check" name="Intensity" id="btnradio2" value="moderate" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btnradio2">Moderate</label>
+                                <input type="radio" class="btn-check" name="Intensity" id="btnradio3" value="intense" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btnradio3">Intense</label>
+                            {% endif %}
+                            {% if this_sighting.Intensity == "moderate" %}
+                                <input type="radio" class="btn-check" name="Intensity" id="btnradio1" value="low" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btnradio1">Low</label>
+                                <input type="radio" class="btn-check" name="Intensity" id="btnradio2" value="moderate" autocomplete="off" checked>
+                                <label class="btn btn-outline-primary" for="btnradio2">Moderate</label>
+                                <input type="radio" class="btn-check" name="Intensity" id="btnradio3" value="intense" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btnradio3">Intense</label>
+                            {% endif %}
+                            {% if this_sighting.Intensity == "intense" %}
+                                <input type="radio" class="btn-check" name="Intensity" id="btnradio1" value="low" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btnradio1">Low</label>
+                                <input type="radio" class="btn-check" name="Intensity" id="btnradio2" value="moderate" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btnradio2">Moderate</label>
+                                <input type="radio" class="btn-check" name="Intensity" id="btnradio3" value="intense" autocomplete="off" checked>
+                                <label class="btn btn-outline-primary" for="btnradio3">Intense</label>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="right_col">
+                        <h6>Where did the activity happen?:</h6>
+                        <div class="form-outline col mb-4">
+                        <input type="text"  class="form-control form-control-lg" name="location" value= "{{this_sighting.location}}"/>
+                        </div>
+                        <h6>When did the activity happen?:</h6>
+                        <div class="form-outline col mb-4">
+                            <input type="date"  class="form-control form-control-lg" name="date" placeholder="When did the activity happen?" value= "{{this_sighting.date}}"/>
+                        </div>
+                        <h6>What time did the activity</h6>
+                        <div class="form-outline col mb-4">
+                            <input type="time"  class="form-control form-control-lg" name="time" placeholder="When time did the activity happen?"/><p>{{this_sighting.time}}</p>
+                        </div>
+                    </div>
+                </div>
+                    <div class="text-boxes">
+                        <textarea class="text-box" name="description" cols="85" rows="10" placeholder="Description to the acivity?">{{this_sighting.description}}</textarea>
+                        <textarea class="text-box" name="reaction" cols="85" rows="10" placeholder="Reaction to the acivity?">{{this_sighting.reaction}}</textarea>
+                    </div>
+                        <div class="button_bar">
+                            <button class="btn btn-info btn-lg btn-block">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+</body>
+</html>

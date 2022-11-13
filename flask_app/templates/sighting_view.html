@@ -41,6 +41,12 @@
                 <h4>{{this_sighting.time}}</h4>
             </div>
             <h5>{{this_sighting.Intensity}}</h5>
+            <br>
+            {% if session.user_id == this_sighting.user_id %}
+            <div class="button_bar">
+                <a href="/sighting/edit/{{this_sighting.id}}" class="add_button">Edit Post</a>
+            </div>
+            {% endif %}
             <h5>Posted by: {{this_sighting.user_name}}</h3>
             <div class="sighting_text">
                 <h5>Description</h5>

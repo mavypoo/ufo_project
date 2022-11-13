@@ -53,14 +53,15 @@ def edit_sighting_page(id):
 
 
 #edit_sighting_db
-@app.route("/sighting/update", methods=["POST"])
+@app.route("/sighting/update/<int:id>", methods=["POST"])
 def update_sighting_page(id):
         #1. Validate; request.form its a function flask
     if not Sighting.validate_sighting(request.form):
         #2. Always redirect to the route that you were at last!!
-        return redirect("/sighting/edit/{id}")
+        return redirect(f"/sighting/edit/{id}")
     #Why we need this? data prevents SQL injection, the process of using the data in the url to execute commands in the database
     data = {
+        "id": id,
         "location": request.form["location"],
         "date": request.form["date"],
         "time": request.form["time"],
@@ -68,13 +69,12 @@ def update_sighting_page(id):
         "Intensity": request.form["Intensity"],
         "num_of_activities": request.form["num_of_activities"],
         "reaction": request.form["reaction"],
-        "title": request.form["title"],
-        "id": id,
+        "title": request.form["title"]
     }
     #call the function that does the query, pass in data to edit the database
     #call the sighting class and the add_sighting function
     Sighting.update_sighting(data)
-    return redirect("/sightings")
+    return redirect(f'/sighting/{id}')
 
 
 #view sightings, Route that will show an individual game - visible route 
