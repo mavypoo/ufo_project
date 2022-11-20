@@ -21,7 +21,7 @@
                     <a class="nav-link" href="/sightings">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/{{userID}}">My Page</a>
+                    <a class="nav-link" href="/user/{{session.user_id}}">My Page</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/contact">Contact Us</a>
@@ -39,14 +39,16 @@
     <div class="container_posts">
         {% if all_post %}
             {% for post in all_post %}
-                <div class="card" id="post" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{post.title}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{post.user_name}}</h6>
-                        <p class="card-text detail_overflow">{{post.description}}</p>
-                        <a href="/sighting/{{post.id}}" class="card-link">Card link</a>
+                <a href="/sighting/{{post.id}}" id="card_link">
+                    <div class="card" id="post" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{post.title}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{post.user_name}}</h6>
+                            <p class="card-text detail_overflow">{{post.description}}</p>
+                            <!-- <a href="/sighting/{{post.id}}" class="card-link">Card link</a> -->
+                        </div>
                     </div>
-                </div>
+                </a>
             {% endfor %}
         {% endif %}
     </div>

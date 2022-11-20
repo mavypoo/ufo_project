@@ -35,11 +35,8 @@ class User:
     def get_user(cls, data):
         query = "SELECT * FROM users WHERE id = %(id)s;"
         results = connectToMySQL(db).query_db(query, data)
-        print(results)
-        if len(results) == 0:
-            return None
-        else: 
-            return cls(results[0]) #0 because where only returning that one result
+        return results[0]
+
 
     #get user by email
     @classmethod

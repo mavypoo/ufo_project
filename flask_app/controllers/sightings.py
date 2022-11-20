@@ -93,8 +93,8 @@ def view_sighting(id):
 
 
 #Route that will delete a game, Need the id of the game to delete 
-@app.route("/sighting/delete/<int:id>")
-def delete_sighting(id):
+@app.route("/sighting/delete/<int:id>/<int:user_id>")
+def delete_sighting(id, user_id):
     #1 check to see if someone is logged in 
     if "user_id" not in session:
         return redirect("/")
@@ -102,7 +102,7 @@ def delete_sighting(id):
         "id": id, # ID of the sighting
     }
     Sighting.delete_sighting(data)
-    return redirect("/")
+    return redirect(f"/user/{user_id}")
 
 
 

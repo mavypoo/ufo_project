@@ -125,20 +125,75 @@
     display: block;
     background-color: aqua;
     border-color:aqua;
-    color: black; 
+    color: black;
+    font-weight: bold; 
 }
 
 .comment_btn:hover{
     color:white;
-    background-color: green;
-    border-color: green;
+    background-color: aquamarine;
+    border-color: aquamarine;
     -moz-transition: all 0.5s ease-in;
     -o-transition: all 0.5s ease-in;
     -webkit-transition: all 0.5s ease-in;
     transition: all 0.5s ease-in;
 }
 
+.believe_btn{
+    display: block;
+    background-color: rebeccapurple;
+    border-color:rebeccapurple;
+    color: black; 
+    font-weight: bold; 
+}
+
+.believe_btn:hover{
+    color:white;
+    background-color: pink;
+    border-color: pink;
+    -moz-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    -webkit-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;
+}
+
+.nonbelieve_btn{
+    display: block;
+    background-color: greenyellow;
+    border-color:greenyellow;
+    color: black; 
+    font-weight: bold; 
+}
+
+.nonbelieve_btn:hover{
+    color:white;
+    background-color: yellowgreen;
+    border-color: yellowgreen;
+    -moz-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    -webkit-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;
+}
+
+.comment_button{
+    display:flex;
+}
+
 .comment_section{
     overflow-y: auto;
-    max-height: 35vh;
+    max-height: 25vh;
+}
+
+.user_table{
+    margin: 0px auto;
+    position: absolute;
+    width: 70%;
+    left:15%;
+    top: 40%;
+    color: white;
+}
+
+#card_link{
+    text-decoration: none;
+    color: black;
 }

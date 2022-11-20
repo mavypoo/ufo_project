@@ -68,19 +68,20 @@ def success():
         flash("You must be logged in to view this page")
         return redirect("/")
     all_post = Sighting.get_all_sightings_by_users()
-    return render_template("sightings.html", all_post=all_post, userID=session['user_id'])
+    return render_template("sightings.html", all_post=all_post)
 
 
 
 @app.route("/user/<int:id>")
 def user_dashboard(id):
     data = {
-        "user_id": id
+        "id": id
     }
     this_user = User.get_user(data)
-    this_user_image = User_Image.get_image_by_user(data)
+    # this_user_image = User_Image.get_image_by_user(data)
     this_user_posts = Sighting.get_all_sightings_by_user(data)
-    return render_template("user.html", this_user = this_user, this_user_image = this_user_image, this_user_posts = this_user_posts)
+    print(this_user_posts)
+    return render_template("user.html", this_user = this_user, this_user_posts = this_user_posts)
 
 @app.route("/profile/<int:id>")
 def profile_page(id):
