@@ -63,12 +63,42 @@
                 </div>
             </form>
             <div class="believe">
-                <span id="like-believe">0</span>
-                <button class="believe_btn" onclick="believe('like-believe')">Believe</button>
+                {% set ns = namespace(believers_exist= false) %}
+                {% for item in all_believers %}
+                    {% if item.user_id==session.user_id and item.sighting_id==this_sighting.id %}
+                        {% set ns.believers_exist = True %}
+                    {%endif %}
+                {% endfor %}
+                {% if ns.believers_exist %}
+                    <a href="/delete/believer/{{session.user_id}}/{{this_sighting.id}}">Believed</a>"
+                    {{num_of_believers}}
+                {% else %}
+                <form action="/create/believer" method="post">
+                    <input type="hidden" name="user_id" value="{{session.user_id}}">
+                    <input type="hidden" name="sighting_id" value="{{this_sighting.id}}">
+                    <button class="believe_btn">Believe</button>
+                    {{num_of_believers}}
+                </form>
+                {% endif %}
             </div>
             <div class="nonbelieve">
-                <span id="non-believer">0</span>
-                <button class="nonbelieve_btn" onclick="believe('non-believer')">NonBelieve</button>
+                {% set ns = namespace(nonbelievers_exist= false) %}
+                {% for item in all_nonbelievers %}
+                    {% if item.user_id==session.user_id and item.sighting_id==this_sighting.id %}
+                        {% set ns.nonbelievers_exist = True %}
+                    {%endif %}
+                {% endfor %}
+                {% if ns.nonbelievers_exist %}
+                    <a href="/delete/nonbeliever/{{session.user_id}}/{{this_sighting.id}}">Nonbelieved</a>"
+                    {{num_of_nonbelievers}}
+                {% else %}
+                <form action="/create/nonbeliever" method="post">
+                    <input type="hidden" name="user_id" value="{{session.user_id}}">
+                    <input type="hidden" name="sighting_id" value="{{this_sighting.id}}">
+                    <button class="nonbelieve_btn">NonBelieve</button>
+                    {{num_of_nonbelievers}}
+                </form>
+                {% endif %}
             </div>
             <hr>
             <div class="comment_section">

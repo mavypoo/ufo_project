@@ -2,6 +2,8 @@ from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.sighting import Sighting
 from flask_app.models.comment import Comment
+from flask_app.models.believer import Believer 
+from flask_app.models.nonbeliever import Nonbeliever 
 
 
 #add_sighing_form
@@ -87,9 +89,16 @@ def view_sighting(id):
     data = {
         "id": id,
     }
+    data2 = {
+        "sighting_id": id
+    }
     this_sighting = Sighting.get_one_sighting_by_user(data)
     all_comments = Comment.get_comment_by_sighting_and_user(data)
-    return render_template("sighting_view.html", this_sighting = this_sighting, all_comments = all_comments)
+    num_of_believers = Believer.get_num_believers(data2)
+    num_of_nonbelievers = Nonbeliever.get_num_nonbelievers(data2)
+    all_believers = Believer.get_all_believers()
+    all_nonbelievers = Nonbeliever.get_all_nonbelievers()
+    return render_template("sighting_view.html", this_sighting = this_sighting, all_comments = all_comments, num_of_believers = num_of_believers, num_of_nonbelievers = num_of_nonbelievers, all_believers=all_believers, all_nonbelievers=all_nonbelievers)
 
 
 #Route that will delete a game, Need the id of the game to delete 
